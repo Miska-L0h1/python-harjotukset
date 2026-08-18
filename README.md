@@ -1,1 +1,1 @@
-Tää on nyt tää tehtävä kansio
+tehtävät löytyy kansiosta tehtavat ja peli kansiosta peliprojekti
