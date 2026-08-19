@@ -6,11 +6,14 @@ Miska Lohikoski
 IDEA:
 dungeon crawler jossa valitaan kolmesta ovesta ja yrittää löytää aarteen (tyyllin joku timantti)! (pelaajalla 3hp ja puu miekka alussa mutta parempia voi löytää)
 
-Ovet ascii artilla:
- ___
-/ 1 \
-|  *|
-|___|
+ikonit ascii artilla:
+ ___    ___    ___  
+/ 1 \  / 2 \  / 3 \ 
+|  *|  |  *|  |  *|
+|___|  |___|  |___| 
+
+Starts bar:
+♥ ♥ ♥ | 🗡 | 🛡 
 
 sit sillä on 10% chance olla aarre (mutta pitää teha ovi countter joka laskee että jonkun esim ekat 5 ovea ei voi olla aarre)
 
