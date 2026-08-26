@@ -18,4 +18,4 @@ elif sex == "Nainen":
     else:
         print("sulla on normaali hemoglobiiniarvo")
 else:
-    "jokin meni pieleen :()"
+    print("jokin meni pieleen :(")
