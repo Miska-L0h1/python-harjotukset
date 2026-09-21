@@ -34,6 +34,14 @@ class House:
         print(f"Useing elevator {drivele}")
         floor = int(input("What floor are we going? "))
         self.Elevators[drivele].GoToFloor(self, floor)
+
+    #da fire alarm
+    def Firealarm(self):
+        print("FIREALARM!!!")
+        for i in len(self.Elevators):
+            self.Elevators[i].GoToFloor(self, self.BottomFloor)
+            print(f"elevator {i} is back on bottom floor")
+        
         
 
 Top = int(input("Top floor? "))
@@ -52,7 +60,7 @@ drivele = int(input("Which elevator do you want to use? (number only) "))
 #while loop for the elevator
 while True:
     if drivele == "":
-        break
+        house.Firealarm
     else:
         house.DriveElevator(drivele)
 
