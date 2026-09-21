@@ -7,13 +7,9 @@ class Race:
         self.manycars = many
 
     def hourpass(self, cars):
-        finished = False
-        while finished == False:
-            for car in cars:
-                car.accele(random.randint(-10, 15))
-                car.travel(1)
-                if car.miles > self.racelength:
-                    finished = True
+        for car in cars:
+            car.accele(random.randint(-10, 15))
+            car.travel(1)
     def printstats(self, cars):
         for car in cars:
             print("-"*26)
@@ -21,8 +17,14 @@ class Race:
             print("Km driven: ",car.miles, "Km")
             print("Car's max speed: ", car.maxspeed, "Km/h")
         print("-"*26)
-    def raceover():
-        pass
+    def raceover(self, cars):
+        for car in cars:
+            #the -1 is for so if the car lands on 8000.
+            if car.miles > (self.racelength - 1):
+                return(True)
+            else:
+                return(False)
+
 #define class auto
 class Auto:
     #set values
@@ -57,5 +59,9 @@ for i in (range(race.manycars)):
     register = "ABC-" + str(i+1)
     cars.append(Auto(random.randint(100,200), 60, register, 0))
 
-race.hourpass(cars)
+over = race.raceover(cars)
+while over == False:
+    race.hourpass(cars)
+    #check if its over
+    over = race.raceover(cars)
 race.printstats(cars)
