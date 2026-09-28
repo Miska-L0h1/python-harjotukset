@@ -1,5 +1,14 @@
 import time
 # define funcitons (prorject 3)
+def doors():
+    door = """
+     ___    ___    ___  
+    | 1 |  | 2 |  | 3 |
+    |  *|  |  *|  |  *| 
+    |___|  |___|  |___|
+    """
+    print(door)
+    chosen = int(input(""))
 def wait(health,maxhealth):
     print("waiting")
     time.sleep(5)
@@ -20,6 +29,8 @@ def sleep(health,maxhealth):
     if health < maxhealth + 1:
         health = health + 1
     return(health)
+
+
 # ask name (prorject 1)
 name = input("Hei! Mikä on nimesi? ")
 # ask age (prorject 2)
