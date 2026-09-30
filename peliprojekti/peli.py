@@ -127,7 +127,15 @@ def tresure():
     print("This is where the adventure ends.")
     over = 1
 def monster():
-    pass
+    monster_skins = ["🧌","🧟","👹","👾","🐉","🕷️"]
+    current_monster = monster_skins[random.randint(1,6)]
+    print(f"""
+    Its a Monster!
+
+        {current_monster}
+
+    {player.name} | score:{player.score} | {"♥ " * player.health} | 🗡  {player.sword} dmg  | 🛡  {player.shield} armor
+    """)
 def over():
     print(f"""
     Game over:
