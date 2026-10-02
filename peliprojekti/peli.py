@@ -1,5 +1,4 @@
-#ADD PROPER MAIN MENU AND NAME
-#ADD RANDOMIFICATION TO MONSTER
+#write the intro text and update the readme
 
 import random
 
@@ -42,6 +41,23 @@ class Monster():
         return(damage)
 
 #define funcitons
+
+#define intro (pull text from a text file that explains the game and "story")
+def intro():
+    with open("peliprojekti/intro.txt") as file:
+        txt = file.readlines()
+        line_count = 0
+    #print the text line by line 5 at a time
+    for line in txt:
+        line_count += 1
+        if line_count != 6:
+            #the [0:-1 is so the lines print together]
+            print(line[0:-1])
+        else:
+            skip()
+            line_count = 0
+            print("")
+            print(line[0:-1])
 
 #define skip (make player enter a input (enter) to proggress for clearer gameplay)
 def skip():
@@ -230,7 +246,7 @@ def monster(player):
     #get random monster skin
     monster_skins = ["🧌","🧟","👹","👾","🐉","🕷️"]
     #create monster
-    monster = Monster(monster_skins[random.randint(1,6)-1],1,1,1)
+    monster = Monster(monster_skins[random.randint(1,6)-1],random.randint(1,4),random.randint(1,2),random.randint(1,3))
     print("Its a Monster!")
     #monster loop
     while True:
@@ -241,6 +257,7 @@ def monster(player):
         """)
         print("attack or block")
         choice = input("")
+        #choice tree for attack/block
         if choice == "attack":
             monster.hp -= player.sword - monster.armor
             print(f"{player.sword - monster.armor} damage to the monster!")
@@ -264,6 +281,7 @@ def monster(player):
         else:
             continue
         print("\n")
+        #check if monster is dead
         if monster.hp <= 0:
             print("You killed the monster")
             player.health += 2
@@ -272,9 +290,12 @@ def monster(player):
             print("+20 score")
             skip()
             break
+        #check if player dead
         if player.health <= 0:
+            print("You died.")
+            skip()
             end()
-
+#end screen
 def end():
     print(f"""
     Game over:
@@ -284,13 +305,29 @@ def end():
     your score: {player.score}
     """)
 
+#print game name:
+print("""
+    _______ _    _ ______    _____ _    _ ______  _____ _______           
+   |__   __| |  | |  ____|  / ____| |  | |  ____|/ ____|__   __|          
+      | |  | |__| | |__    | |  __| |  | | |__  | (___    | |             
+      | |  |  __  |  __|   | | |_ | |  | |  __|  \___ \   | |             
+      | |  | |  | | |____  | |__| | |__| | |____ ____) |  | |             
+  ____|_|__|_| _|_|______|__\_____|\____/|______|_____/   |_|____  ______ 
+ |  ____/ __ \|  __ \  |__   __|  __ \|  ____|/ ____| |  | |  __ \|  ____|
+ | |__ | |  | | |__) |    | |  | |__) | |__  | (___ | |  | | |__) | |__   
+ |  __|| |  | |  _  /     | |  |  _  /|  __|  \___ \| |  | |  _  /|  __|  
+ | |   | |__| | | \ \     | |  | | \ \| |____ ____) | |__| | | \ \| |____ 
+ |_|    \____/|_|  \_\    |_|  |_|  \_\______|_____/ \____/|_|  \_\______|
+                                                                          
+""")
+
+#menu
 age = int(input("How old are you? "))
 # kick under 12 year old off
 if age > 12:
     exit
 
-name = input("Hi! what is your name? ")
-print("hi", name)
+name = input("What is your name? ")
 
 player = Player(name)
 
@@ -298,6 +335,9 @@ player = Player(name)
 print("Do you want to play the infinite-mode?")
 print("yes/no")
 infinite_mode = input("")
+
+#play the intro
+intro()
 
 #The while loop
 while True:
