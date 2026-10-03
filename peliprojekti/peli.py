@@ -1,4 +1,5 @@
-#write the intro text and update the readme
+#update the readme
+#monster random stats need to be worked on
 
 import random
 
@@ -49,14 +50,12 @@ def intro():
         line_count = 0
     #print the text line by line 5 at a time
     for line in txt:
-        line_count += 1
-        if line_count != 6:
+        #check if line is empty, so the text is easyer to read bit by bit
+        if line != "\n":
             #the [0:-1 is so the lines print together]
             print(line[0:-1])
         else:
             skip()
-            line_count = 0
-            print("")
             print(line[0:-1])
 
 #define skip (make player enter a input (enter) to proggress for clearer gameplay)
@@ -246,7 +245,7 @@ def monster(player):
     #get random monster skin
     monster_skins = ["🧌","🧟","👹","👾","🐉","🕷️"]
     #create monster
-    monster = Monster(monster_skins[random.randint(1,6)-1],random.randint(1,4),random.randint(1,2),random.randint(1,3))
+    monster = Monster(monster_skins[random.randint(1,6)-1],random.randint(1,4),player.shield - random.randint(1,2),player.sword - random.randint(1,2))
     print("Its a Monster!")
     #monster loop
     while True:
@@ -289,12 +288,13 @@ def monster(player):
             player.score += 20
             print("+20 score")
             skip()
-            break
+            exit()
         #check if player dead
         if player.health <= 0:
             print("You died.")
             skip()
             end()
+            break
 #end screen
 def end():
     print(f"""
@@ -304,6 +304,7 @@ def end():
 
     your score: {player.score}
     """)
+    
 
 #print game name:
 print("""
