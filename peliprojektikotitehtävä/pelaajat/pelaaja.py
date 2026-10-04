@@ -1,2 +1,0 @@
-def pelaaja():
-    print("woop")

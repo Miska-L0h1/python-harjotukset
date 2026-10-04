@@ -1,5 +1,5 @@
-#update the readme
-#monster random stats need to be worked on
+#figure out if its posible to clear the console during the program for more clear look.
+#also test the shit out of this
 
 import random
 
@@ -29,6 +29,7 @@ class Monster():
     def __init__(self,icon, hp, damage, armor):
         self.icon = icon
         self.hp = hp
+        self.maxhp = hp
         self.dmg = damage
         self.armor = armor
     def monster_damage(self):
@@ -235,6 +236,7 @@ def tresure():
                 💎
             
         """)
+        player.score += 50
         print("You found the gem!")
         print("This is where the adventure ends.")
         skip()
@@ -245,12 +247,12 @@ def monster(player):
     #get random monster skin
     monster_skins = ["🧌","🧟","👹","👾","🐉","🕷️"]
     #create monster
-    monster = Monster(monster_skins[random.randint(1,6)-1],random.randint(1,4),player.shield - random.randint(1,2),player.sword - random.randint(1,2))
+    monster = Monster(monster_skins[random.randint(1,6)-1],random.randint(1,4),(player.shield - random.randint(1,2)),(player.sword - random.randint(1,2)))
     print("Its a Monster!")
     #monster loop
     while True:
         print(f"""
-        {"♥ " * monster.hp}
+        {"♥" * monster.hp}{"♡" * (monster.maxhp - monster.hp)}
         {monster.icon}
         {player.stats()}
         """)
@@ -259,6 +261,9 @@ def monster(player):
         #choice tree for attack/block
         if choice == "attack":
             monster.hp -= player.sword - monster.armor
+            #just in case the monster fully blocks the hit, so it doenst acsidentaly give extra hp to it
+            if player.health > player.maxhealth:
+                player.health = player.maxhealth
             print(f"{player.sword - monster.armor} damage to the monster!")
             if monster.hp > 0:
                 monster_damage = monster.monster_damage()
@@ -268,11 +273,21 @@ def monster(player):
         elif choice == "block":
             monster_damage = monster.monster_damage()
             player.health -= monster_damage - player.shield
-            #just in case the shield full block the hit, so it doenst acsidentalygive extra hp
+            #just in case the shield full block the hit, so it doenst acsidentaly give extra hp
             if player.health > player.maxhealth:
                 player.health = player.maxhealth
-            print(f"You took {monster_damage - player.shield} damage from the monster!")
-            hitback = round(monster_damage * 0.25) - monster.armor
+            if monster_damage - player.shield >= 0:
+                print(f"You took {monster_damage - player.shield} damage from the monster!")
+            else:
+                print(f"you blocked the monsters hit!")
+                if random.randint(1,4) == 4:
+                    if player.health + 2 <= player.maxhealth:
+                        player.health += 2
+                        print("you healed 2 health")
+                    elif player.health + 1 <= player.maxhealth:
+                        player.health += 1
+                        print("you healed 1 health")
+            hitback = monster_damage - monster.armor
             if hitback > 0:
                 monster.hp -= hitback
                 print(f"{hitback} damage bounced back to the monster!")
@@ -288,13 +303,13 @@ def monster(player):
             player.score += 20
             print("+20 score")
             skip()
-            exit()
+            break
         #check if player dead
         if player.health <= 0:
             print("You died.")
             skip()
             end()
-            break
+            exit()
 #end screen
 def end():
     print(f"""
@@ -308,24 +323,26 @@ def end():
 
 #print game name:
 print("""
-    _______ _    _ ______    _____ _    _ ______  _____ _______           
-   |__   __| |  | |  ____|  / ____| |  | |  ____|/ ____|__   __|          
-      | |  | |__| | |__    | |  __| |  | | |__  | (___    | |             
-      | |  |  __  |  __|   | | |_ | |  | |  __|  \___ \   | |             
-      | |  | |  | | |____  | |__| | |__| | |____ ____) |  | |             
-  ____|_|__|_| _|_|______|__\_____|\____/|______|_____/   |_|____  ______ 
- |  ____/ __ \|  __ \  |__   __|  __ \|  ____|/ ____| |  | |  __ \|  ____|
- | |__ | |  | | |__) |    | |  | |__) | |__  | (___ | |  | | |__) | |__   
- |  __|| |  | |  _  /     | |  |  _  /|  __|  \___ \| |  | |  _  /|  __|  
- | |   | |__| | | \ \     | |  | | \ \| |____ ____) | |__| | | \ \| |____ 
- |_|    \____/|_|  \_\    |_|  |_|  \_\______|_____/ \____/|_|  \_\______|
-                                                                          
+            _______ _    _ ______    _____ _    _ ______  _____ _______                 
+           |__   __| |  | |  ____|  / ____| |  | |  ____|/ ____|__   __|                
+              | |  | |__| | |__    | |  __| |  | | |__  | (___    | |                   
+              | |  |  __  |  __|   | | |_ | |  | |  __|  \___ \   | |                   
+              | |  | |  | | |____  | |__| | |__| | |____ ____) |  | |                   
+   ______ ____|_|__|_|_ |_|______|__\_____|\____/|______|_____/__ |_|___ ______ ______  
+  |______|______|______|______|______|______|______|______|______|______|______|______| 
+ |  ____/ __ \|  __ \  |__   __|  __ \|  ____|   /\    / ____| |  | |  __ \|  ____|     
+ | |__ | |  | | |__) |    | |  | |__) | |__     /  \  | (___ | |  | | |__) | |__        
+ |  __|| |  | |  _  /     | |  |  _  /|  __|   / /\ \  \___ \| |  | |  _  /|  __|       
+ | |   | |__| | | \ \     | |  | | \ \| |____ / ____ \ ____) | |__| | | \ \| |____      
+ |_|    \____/|_|  \_\    |_|  |_|  \_\______/_/    \_\_____/ \____/|_|  \_\______|                                                                     
 """)
 
 #menu
 age = int(input("How old are you? "))
 # kick under 12 year old off
 if age > 12:
+    print("the game is K12")
+    print("the game will close itself now.")
     exit
 
 name = input("What is your name? ")
@@ -334,7 +351,7 @@ player = Player(name)
 
 #infinite mode switch for an alternative game play
 print("Do you want to play the infinite-mode?")
-print("yes/no")
+print("yes or no (default)")
 infinite_mode = input("")
 
 #play the intro

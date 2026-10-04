@@ -1,32 +1,70 @@
-Joku fancy nimi
+## The quest for treasure
 
 Miska Lohikoski
 
+## The idea
+The idea is to find the lost gem from a caved in temple now opened.
+By finding the lost gem the player can stop the monsters attacking local villagers.
 
-IDEA:
-dungeon crawler jossa valitaan kolmesta ovesta ja yrittää löytää aarteen (tyyllin joku timantti 💎)! (pelaajalla 3hp ja puu miekka alussa mutta parempia voi löytää)
+## (the non infinite mode) The goal:
+the goal is to find a mystical gem 💎 (before that you need 50 score)
 
-ikonit ascii artilla:
+## How to play:
+
+at start of the game you are asked few things:
+
+your age:
+if under 12 you will be kicked off the game, dont lie.
+your name.
+and if you want to play infinite mode?
+infinite mode is basicly the same game ast the normal but after finding the game continues.
+if your goal is to reach highest score posible to impress ALL of your friends then inifinte mode allows you to max out that highscore.
+by default the game will use the normal mode, where the game ends when you find the gem.
+
+The game is quite simple to play and will tell the player what to do whit instuctions like:
+"<press enter to continue>" and "pick another door" and "attack or block"
+As seen in the last example the game might ask player to input an answer, in that case its always told what the expected input is, either attack or block in the examples case.
+
+another example:
+What door will you chose?
  ___    ___    ___  
-/ 1 \  / 2 \  / 3 \ 
-|  *|  |  *|  |  *|
-|___|  |___|  |___| 
+| 1 |  | 2 |  | 3 |
+|  *|  |  *|  |  *| 
+|___|  |___|  |___|
 
-Starts bar:
-♥ ♥ ♥ | 🗡 | 🛡
+the expected input is 1, 2 or 3. if the answer is not one of those you will be asked again.
 
+# Monster battle
 
-sit sillä on 10% chance olla aarre (mutta pitää teha ovi countter joka laskee että jonkun esim ekat 5 ovea ei voi olla aarre)
+Battleing monsters is the most complicated mechanic in the game.
+the fight will look like this:
 
-15% että se on lukittu (mutta pitää tehä ominaisuus joka laskee että kaikki ovet ei oo lukossa (ja että se ei lukittu ovi ei oo aina kolmas (tyyllin: eka generoidaan ovet, sitten checkataan onko kaikki lukossa, jos on niin random.randint(1,3) ja se re-rollataan kunnes se ei oo lukossa) ) )
+            ♥♥♥♡
+             👹
 
-30% että se on tyhjä (generoidaan uudet 3 ovea)
+Player | score: 15 | highscore: 100
+♥♥♥♥♥♡♡ | 🗡  6 dmg  | 🛡  5 armor
 
-25% että siellä on joku örkki (esim lepakko tai zombi) jota pitää tapella (vaihto ehdoiksi tyyliin hit, block, run)
-(hit on x% hit chanse ja x damage riippuu miekasta, block kilpi blockaa x% damagesta, run poistuu taistelusta ja scoresta tippuu yksi) jos voittaa örkin niin saa jotain lootia
+the most important thing you need to know is to keep eye on is your health displayed under your name
+second most important is the monsters health.
 
-20% siellä on joku loot (heal, parempi miekka, parempi kilpi)
+based on these two things and also the damage of your sword and your shields armor
+you should chose either **attack** the monster in wich case the monster will take damage and so will you.
+or **block** the monsters attack, if the monsters damage is more powerfull than the monster armor the rest of it after the armor will be bounced back at the monster.
+if you fully block the hit you will heal up to 2 health if needed.
 
-joka oven jälkeen on mahollisuus luovuttaa
+## Sustainable development
+Sustainable development goals the game is linked to is 16 Peace, Justice and Strong Institutions.
 
-endingsit: kuolema, löytää aarre, luovuttaa.
+By finding the gem and stoping the hords of monsters from terrorising the locals you are bringing peace to the village.
+"People everywhere should live free from fear and all forms of violence,
+feeling safe as they go about their lives—regardless
+of their ethnicity, faith, or sexual orientation."
+
+How can the locals live free from fear and violence if there are monsters around?
+thats right, they cant.
+
+## File structure
+the game is stored in the peli.py file.
+sntro.txt holds as it name says the intro
+save.txt holds the current highscore, it will regenerate if deleted but the progress will be lost.
