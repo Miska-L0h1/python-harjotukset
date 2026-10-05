@@ -1,4 +1,4 @@
-#figure out if its posible to clear the console during the program for more clear look.
+#break into files?
 #also test the shit out of this
 
 import random
@@ -44,6 +44,10 @@ class Monster():
 
 #define funcitons
 
+#define clearing the chat
+def clear() -> None:
+    print("\033[H\033[J", end="")
+
 #define intro (pull text from a text file that explains the game and "story")
 def intro():
     with open("peliprojekti/intro.txt") as file:
@@ -57,6 +61,7 @@ def intro():
             print(line[0:-1])
         else:
             skip()
+            clear()
             print(line[0:-1])
 
 #define skip (make player enter a input (enter) to proggress for clearer gameplay)
@@ -78,9 +83,13 @@ What door will you chose?
     while True:
         try:
             picked_door = int(input(""))
-            break
+            if 0 < picked_door < 4:
+                break
+            else:
+                print("pick 1, 2 or 3")
         except ValueError:
             print("enter the door number, just the number.")
+    clear()
     #set up the door mechanic variables
     doors_lock = [0, 0, 0]
     chanse = random.randint(1,100)
@@ -141,6 +150,7 @@ def empty(player):
         player.health += 1
         print("+1 health")
     skip()
+    clear()
     return(player)
 
 #define loot mechanic, bit long
@@ -152,6 +162,7 @@ def loot(player):
 
     """)
     skip()
+    clear()
     chanse = random.randint(1,4)
     #potion
     if chanse == 1:
@@ -174,6 +185,7 @@ def loot(player):
         player.score += 5
         print("+5 score")
         skip()
+        clear()
     #sword
     elif chanse == 2:
         print("""
@@ -188,6 +200,7 @@ def loot(player):
         print("+5 score")
         print("+1 damage to the sword")
         skip()
+        clear()
     #shield
     elif chanse == 3:
         print("""
@@ -202,10 +215,12 @@ def loot(player):
         player.score += 5
         print("+5 score")
         skip()
+        clear()
     #empty
     elif chanse == 4:
         print("Its a empty :(")
         skip()
+        clear()
     return(player)
 
 #define tresure, whit adaptivity as per gamemode
@@ -222,6 +237,7 @@ def tresure():
         player.score += 50
         print("+50 score")
         skip()
+        clear()
     #normal mode
     else:
         print("What is this?")
@@ -240,6 +256,7 @@ def tresure():
         print("You found the gem!")
         print("This is where the adventure ends.")
         skip()
+        clear()
         end()
 
 #define monster, long and complicated
@@ -270,6 +287,7 @@ def monster(player):
                 player.health -= monster_damage
                 print(f"You took {monster_damage} damage from the monster!")
             skip()
+            clear()
         elif choice == "block":
             monster_damage = monster.monster_damage()
             player.health -= monster_damage - player.shield
@@ -292,6 +310,7 @@ def monster(player):
                 monster.hp -= hitback
                 print(f"{hitback} damage bounced back to the monster!")
             skip()
+            clear()
         else:
             continue
         print("\n")
@@ -326,10 +345,10 @@ print("""
             _______ _    _ ______    _____ _    _ ______  _____ _______                 
            |__   __| |  | |  ____|  / ____| |  | |  ____|/ ____|__   __|                
               | |  | |__| | |__    | |  __| |  | | |__  | (___    | |                   
-              | |  |  __  |  __|   | | |_ | |  | |  __|  \___ \   | |                   
+              | |  |  __  |  __|   | | |_ | |  | |  __| \____ \   | |                   
               | |  | |  | | |____  | |__| | |__| | |____ ____) |  | |                   
-   ______ ____|_|__|_|_ |_|______|__\_____|\____/|______|_____/__ |_|___ ______ ______  
-  |______|______|______|______|______|______|______|______|______|______|______|______| 
+              |_|  |_|  |_|______| \_____|\_____/|______|_____/   |_| 
+  ______ ____  _____    _______ _____  ______     _     _____ _    _ _____  ______ 
  |  ____/ __ \|  __ \  |__   __|  __ \|  ____|   /\    / ____| |  | |  __ \|  ____|     
  | |__ | |  | | |__) |    | |  | |__) | |__     /  \  | (___ | |  | | |__) | |__        
  |  __|| |  | |  _  /     | |  |  _  /|  __|   / /\ \  \___ \| |  | |  _  /|  __|       
@@ -340,10 +359,10 @@ print("""
 #menu
 age = int(input("How old are you? "))
 # kick under 12 year old off
-if age > 12:
+if age < 12:
     print("the game is K12")
     print("the game will close itself now.")
-    exit
+    exit()
 
 name = input("What is your name? ")
 
@@ -353,6 +372,7 @@ player = Player(name)
 print("Do you want to play the infinite-mode?")
 print("yes or no (default)")
 infinite_mode = input("")
+clear()
 
 #play the intro
 intro()
@@ -360,6 +380,7 @@ intro()
 #The while loop
 while True:
     doors(player)
+    clear()
     #make sure health doesnt surpass maxhealth stats
     if player.health > player.maxhealth:
         player.maxhealth = player.maxhealth
