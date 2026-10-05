@@ -65,6 +65,15 @@ How can the locals live free from fear and violence if there are monsters around
 thats right, they cant.
 
 ## File structure
-the game is stored in the peli.py file.
-sntro.txt holds as it name says the intro
-save.txt holds the current highscore, it will regenerate if deleted but the progress will be lost.
+
+projekti/
+│
+├── peli.py        ← Main loop
+├── texts.py       ← functions to print logo and intro
+├── tools.py       ← basic "tools" used around the code to clean it up
+├── loot.py        ← functions related to loot (basic loot, tresure, empty)
+├── monster.py     ← monster related settings
+├── save.txt       ← Save file
+└── texts/
+    ├── logo.txt       ← Logo of the game
+    └── intro.txt      ← intro text
