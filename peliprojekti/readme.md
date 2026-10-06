@@ -73,7 +73,5 @@ projekti/
 ├── tools.py       ← basic "tools" used around the code to clean it up
 ├── loot.py        ← functions related to loot (basic loot, tresure, empty)
 ├── monster.py     ← monster related settings
-├── save.txt       ← Save file
-└── texts/
-    ├── logo.txt       ← Logo of the game
-    └── intro.txt      ← intro text
+└── save.txt       ← Save file
+ 
