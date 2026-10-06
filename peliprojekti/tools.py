@@ -15,6 +15,6 @@ Game over:
 your highscore: {highscore}
 
 your score: {player.score}
-
+__________________________
     """)
     exit()

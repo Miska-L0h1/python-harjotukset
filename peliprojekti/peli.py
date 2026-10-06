@@ -100,6 +100,8 @@ What door will you chose?
             break
 
 #menu
+tools.ClearCLI
+
 texts.logo()
 
 age = int(input("How old are you? "))
@@ -132,7 +134,7 @@ while True:
     #set score as highscore if its bigger than highscore
     if player.score > highscore:
         highscore = player.score
-        with open("peliprojekti/save.txt", "w") as file:
+        with open("save.txt", "w") as file:
             file.write(str(highscore))
     if player.health <= 0:
         tools.end(player,highscore)
